@@ -1,0 +1,14 @@
+{% extends "templates/base.twig" %}
+
+{% block title %}Follower view - {{ users.username }}{% endblock %}
+
+{% block body %}
+{% if followers|length > 0 %}
+    <ul>
+        {% for follower in followers %}
+            <li>{{ follower.username|e }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+<h1>{{ follower.username }}</h1>
+{% endblock %}
