@@ -1,6 +1,6 @@
 {% extends "templates/base.twig" %}
 
-{% block title %}My website home{% endblock %}
+{% block title %}Login{% endblock %}
 
 {% block body %}
 <h1>Hello, World!</h1>
@@ -13,6 +13,7 @@
   </p>
   {% endif %}
 </form>
+{% if posts|length > 0 %}
 <ol>
   {% for post in posts %}
   <li>
@@ -20,4 +21,5 @@
   </li>
   {% endfor %}
 </ol>
+{% endif %}
 {% endblock %}
