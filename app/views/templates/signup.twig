@@ -1,0 +1,102 @@
+{% extends "templates/base.twig" %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+        <main class="login">
+            <div class="login-column">
+                <img
+                    src="/assets/images/phone.png"
+                    alt="Phone Image"
+                    title="Phone Image"
+                    class="login-phone-image"
+                />
+            </div>
+            <section class="login-column">
+                <div class="login-section login-sign-in">
+                    <img
+                        src="/assets/images/logo.png"
+                        alt="Logo"
+                        title="Logo"
+                        class="login-logo"
+                    />
+                    <form method="post" action="/signup" class="login-form">
+                        <div class="login-input-container">
+                            <input
+                                type="text"
+                                name="name"
+                                placeholder="Full Name"
+                                required
+                                class="login-input"
+                            />
+                        </div>
+                        <div class="login-input-container">
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Email ID"
+                                required
+                                class="login-input"
+                            />
+                        </div>
+                        <div class="login-input-container">
+                            <input
+                                type="text"
+                                name="username"
+                                placeholder="Username"
+                                required
+                                class="login-input"
+                            />
+                        </div>
+                        <div class="login-input-container">
+                            <input
+                                type="password"
+                                name="password"
+                                placeholder="Password"
+                                required
+                                class="login-input"
+                            />
+                        </div>
+                        <div class="login-input-container">
+                            <input
+                                type="submit"
+                                value="Sign Up"
+                                class="login-input login-input--btn"
+                            />
+                        </div>
+                    </form>
+                    <span class="login-divider">or</span>
+                    <a class="login-fb-link" href="#">
+                        <i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i> Log in with Facebook
+                    </a>
+                </div>
+                <div class="login-section login-sign-up">
+                    <span class="login-text">
+                        Already have an account?
+                        <a href="/login" class="login-link">
+                            Log In
+                        </a>
+                    </span>
+                </div>
+                <div class="login-section login-section--transparent login-app">
+                    <span class="login-text">
+                        Get the app.
+                    </span>
+                    <div class="login-appstores">
+                        <img
+                            src="/assets/images/ios.png"
+                            alt="iOS"
+                            title="Get the app!"
+                            class="login-appstore"
+                        />
+                        <img
+                            src="/assets/images/android.png"
+                            alt="Android"
+                            title="Get the app!"
+                            class="login-appstore"
+                        />
+                    </div>
+                </div>
+            </section>
+        </main>
+{% endblock %}

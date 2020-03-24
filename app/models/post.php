@@ -17,6 +17,23 @@ class Post {
         $stmt->execute([$data]);
     }
 
+    public static function get_comments()
+    {
+        $db = \DB::get_instance();
+        $stmt = $db->prepare("SELECT * from comments INNER JOIN posts ON comments.postId = posts.id ORDER BY comments.id");
+        $rows = $stmt->fetchAll();
+        return $rows;
+    }
+
+    public static function get_all()
+    {
+        $db = \DB::get_instance();
+        $stmt = $db->query("SELECT * FROM posts ORDER BY id");
+        $rows = $stmt->fetchAll();
+        return $rows;
+    }
+
+
 
 }
 

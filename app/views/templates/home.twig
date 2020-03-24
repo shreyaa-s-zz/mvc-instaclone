@@ -1,103 +1,37 @@
 {% extends "templates/base.twig" %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Feed{% endblock %}
 
 {% block body %}
-        <main class="login">
-            <div class="login-column">
-                <img 
-                    src="/assets/images/phone.png"
-                    alt="Phone Image"
-                    title="Phone Image"
-                    class="login-phone-image"
-                />
+{% include("templates/navbar.twig") %}
+
+    {% for post in posts %}
+        <section class="photo">
+            <header class="photo-header">
+                <div class="photo-header-column">
+                    <img class="photo-avatar" src="{{user.profilePicture}}" />
+                </div>
+                <div class="photo-header-column">
+                    <span class="photo-username">{{user.username}}</span>
+                </div>
+            </header>
+            <div class="photo-file-container">
+                <img class="photo-file" src="{{post.image}}" />
             </div>
-            <section class="login-column">
-                <div class="login-section login-sign-in">
-                    <img 
-                        src="/assets/images/logo.png"
-                        alt="Logo"
-                        title="Logo"
-                        class="login-logo"
-                    />
-                    <form method="GET" action="feed.html" class="login-form">
-                        <div class="login-input-container">
-                            <input 
-                                type="text"
-                                name="username"
-                                placeholder="Username"
-                                required
-                                class="login-input"
-                            />
-                        </div>
-                        <div class="login-input-container">
-                            <input 
-                                type="password"
-                                name="password"
-                                placeholder="Password"
-                                required
-                                class="login-input" 
-                            />
-                            <a href="#" class="login-form-link">Forgot?</a>
-                        </div>
-                        <div class="login-input-container">
-                            <input
-                                type="submit"
-                                value="Log in"
-                                class="login-input login-input--btn"
-                            />
-                        </div>
-                    </form>
-                    <span class="login-divider">or</span>
-                    <a class="login-fb-link" href="#">
-                        <i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i> Log in with Facebook
-                    </a>
+
+            {% for comment in comments %}
+              <header class="comment-header">
+                <div class="comment-header-column">
+                    <span class="comment-username">{{comment.username}}"</span>
                 </div>
-                <div class="login-section login-sign-up">
-                    <span class="login-text">
-                        Don't have an account? 
-                        <a href="#" class="login-link">
-                            Sign up
-                        </a>
-                    </span>
+                <div class="comment-header-column">
+                    <span class="comment-commentNote">{{comment.commentNote}}</span>
                 </div>
-                <div class="login-section login-section--transparent login-app">
-                    <span class="login-text">
-                        Get the app.
-                    </span>
-                    <div class="login-appstores">
-                        <img 
-                            src="/assets/images/ios.png"
-                            alt="iOS"
-                            title="Get the app!"
-                            class="login-appstore" 
-                        />
-                        <img 
-                            src="/assets/images/android.png"
-                            alt="Android"
-                            title="Get the app!"
-                            class="login-appstore" 
-                        />
-                    </div>
-                </div>
-            </section>
-        </main>
-{# <form action="/" method="POST">
-  <p><textarea name="caption" placeholder="Caption"></textarea></p>
-  <p><input type="submit" /></p>
-  {% if posted %}
-  <p>
-    <em><strong>Successfully</strong> posted!</em>
-  </p>
-  {% endif %}
-</form> #}
-{% if posts|length > 0 %}
-<ol>
-  {% for post in posts %}
-  <li>
-    <a href="/post/{{ post.id }}">{{ post.caption }}</a>
-  </li>
-  {% endfor %}
-</ol>
-{% endif %}
+              </header>
+            {% endfor %}
+
+        </section>
+    {% endfor %}
+
 {% endblock %}
+
