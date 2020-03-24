@@ -1,9 +1,10 @@
 {% extends "templates/base.twig" %}
-{% extends "templates/navbar.twig" %}
 
 {% block title %}Feed{% endblock %}
 
 {% block body %}
+{% include("templates/navbar.twig") %}
+
     {% for post in posts %}
         <section class="photo">
             <header class="photo-header">
@@ -17,6 +18,7 @@
             <div class="photo-file-container">
                 <img class="photo-file" src="{{post.image}}" />
             </div>
+
             {% for comment in comments %}
               <header class="comment-header">
                 <div class="comment-header-column">
@@ -27,8 +29,9 @@
                 </div>
               </header>
             {% endfor %}
+
         </section>
     {% endfor %}
+
 {% endblock %}
 
-{% include("templates/footer.twig") %}

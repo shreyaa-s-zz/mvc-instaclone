@@ -1,19 +1,20 @@
 {% extends "templates/base.twig" %}
 
-{% block title %}Post view - {{ post.id }}{% endblock %}
+{% block title %}Post{% endblock %}
 
 {% block body %}
-{% if posts|length > 0 %}
-    <ul>
-        {% for post in posts %}
-            <li>
-              {{ post.image|e }}
-              <h1>{{ post.user }}{{ post.caption }}</h1>
-              {% for comment in comments where postID == post.id %}
-                <li>{{ comment.user }}{{ comment.comm }}</li>
-              {% endfor %}
-        {% endfor %}
-        <h1>Hello World!</h1>
-    </ul>
-{% endif %}
+{% include("templates/navbar.twig") %}
+
+<center>
+  <form method="post" action="/post" enctype='multipart/form-data'>
+  <br>
+    {# <img id="blah" src="#" alt="your image" /><br><br> #}
+    <input type='file' name='file' /><br><br>
+    <input type='text' name='caption' placeholder='caption'/><br><br>
+    <input type='submit' value='Post Picture' name='but_upload'>
+  </form>
+  </center>
+
+{# {% include("templates/javascript/post.js") %} #}
+
 {% endblock %}
