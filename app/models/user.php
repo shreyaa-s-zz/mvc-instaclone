@@ -7,10 +7,8 @@ class User                                               //not user.following ba
   public static function get_user()
     {
         $db = \DB::get_instance();
-        $data = [
-            ":username" => $_SESSION["username"],
-        ];
-        $sql = $db->query("SELECT * FROM users WHERE username=:username");
+        $username = $_SESSION['username'];
+        $sql = $db->query("SELECT * FROM users WHERE username = $username;");
         $row = $sql->fetchAll();
         return $row;
     }

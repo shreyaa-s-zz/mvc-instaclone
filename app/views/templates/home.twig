@@ -17,7 +17,7 @@
             </div>
             <div class="photo-info">
                     <div class="photo-icons">
-                        <span class="photo-icon" id="like" value={{post.id}}>
+                        <span class="photo-icon" id="like" data={{post.id}}>
                         <a href="/post/{{ post.id }}">{{ post.caption }}</a>
                             <i class="fa fa-heart-o heart fa-lg"></i>
                         </span>
@@ -34,15 +34,17 @@
                             </li>
                         {% endfor %}
                     </ul>
-                    <div class="photo-add-comment-container">
+                    <form class="photo-add-comment-container" onsubmit="comment()">
                         <textarea placeholder="Add a comment..." class="photo-add-comment"></textarea>
+                        {# hidden attribute post id #}
                         <i class="fa fa-ellipsis-h"></i>
-                    </div>
+                        <input type="submit" value="Comment">
+                    </form>
             </div>
         </section>
     {% endfor %}
 
 <h1> Hello!!!! </h1>
-
+{% include("templates/javascript/like.js") %}
 {% endblock %}
 

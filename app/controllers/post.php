@@ -29,9 +29,17 @@ class Post {
           $status = false;
 
           echo \View\Loader::make()->render("templates/home.twig", array(
-              "posts" => \Model\Post::get_all(),
+              "posts" => \Model\Post::get_feed(),
               "posted" => $status,
           ));
-      }
+    }
+
+    public function like($id) {
+        if(\Model\Post::like($id)) {
+            return true;
+        }
+        else
+        return false;
+    }
 }
 ?>

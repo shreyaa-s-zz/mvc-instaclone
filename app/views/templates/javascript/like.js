@@ -8,12 +8,28 @@ $("#like").click(function(event) {
     dataType: "json",
     success: function(response) {
       if (!response) {
-        $("#enroll_result").html("Enrollment Number Already Exists");
-        event.preventDefault();
-        alert("Enrollment Number Already Exists");
+        // no change
       } else {
-        $("#enroll_result").empty();
+        // button colour changes to red
       }
     }
   });
 });
+
+function comment() {
+  // var inputvalue = comment;
+  // var input post id
+  $.ajax({
+    type: "post",
+    url: "/app/controller/post.php",
+    data: { postId: postId, commentNote = comment },
+    dataType: "json",
+    success: function(response) {
+      if (!response) {
+        // no change
+      } else {
+        // reload comments
+      }
+    }
+  });
+}

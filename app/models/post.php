@@ -25,10 +25,18 @@ class Post {
         return $rows;
     }
 
-    public static function get_all()
+    public static function get_feed()
     {
         $db = \DB::get_instance();
-        $stmt = $db->query("SELECT * FROM posts ORDER BY id");
+        $stmt = $db->query("SELECT * FROM posts ORDER BY id DESC");
+        $rows = $stmt->fetchAll();
+        return $rows;
+    }
+
+    public static function get_trending()
+    {
+        $db = \DB::get_instance();
+        $stmt = $db->query("SELECT * FROM posts ORDER BY likes DESC");
         $rows = $stmt->fetchAll();
         return $rows;
     }
@@ -36,11 +44,10 @@ class Post {
     public static function like($id)
     {
         $db = \DB::get_instance();
-        $sql = "UPDATE posts SET likes = likes+1 WHERE id=$id";
+        $sql = ("UPDATE posts SET likes = likes+1 WHERE id=$id;");
         $db->query($sql);
+        return true;
     }
-
-
 
 }
 
