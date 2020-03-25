@@ -21,6 +21,7 @@ class Signup
       // Checking the credentials
       if(\Model\Check::usernameCheck($username)) {
         if(\Model\Check::emailCheck($email)) {
+          \Model\User::create_user($name,$username,$email,$passwordHash);
           echo \View\Loader::make()->render("templates/home.twig", array(
             "posts" => \Model\Post::get_all(),
             "error" => false

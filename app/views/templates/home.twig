@@ -9,29 +9,40 @@
         <section class="photo">
             <header class="photo-header">
                 <div class="photo-header-column">
-                    <img class="photo-avatar" src="{{user.profilePicture}}" />
-                </div>
-                <div class="photo-header-column">
                     <span class="photo-username">{{user.username}}</span>
                 </div>
             </header>
             <div class="photo-file-container">
                 <img class="photo-file" src="{{post.image}}" />
             </div>
-
-            {% for comment in comments %}
-              <header class="comment-header">
-                <div class="comment-header-column">
-                    <span class="comment-username">{{comment.username}}"</span>
-                </div>
-                <div class="comment-header-column">
-                    <span class="comment-commentNote">{{comment.commentNote}}</span>
-                </div>
-              </header>
-            {% endfor %}
-
+            <div class="photo-info">
+                    <div class="photo-icons">
+                        <span class="photo-icon" id="like" value={{post.id}}>
+                        <a href="/post/{{ post.id }}">{{ post.caption }}</a>
+                            <i class="fa fa-heart-o heart fa-lg"></i>
+                        </span>
+                        <span class="photo-icon">
+                            <i class="fa fa-comment-o fa-lg"></i>
+                        </span>
+                    </div>
+                    <span class="photo-likes">{{post.likes}}</span>
+                    <ul class="photo-comments">
+                        {% for comment in comments %}
+                            <li class="photo-comment">
+                                <span class="photo-comment-author">{{comment.username}}</span>
+                                <span class="photo-comment-note">{{comment.commentNote}}</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="photo-add-comment-container">
+                        <textarea placeholder="Add a comment..." class="photo-add-comment"></textarea>
+                        <i class="fa fa-ellipsis-h"></i>
+                    </div>
+            </div>
         </section>
     {% endfor %}
+
+<h1> Hello!!!! </h1>
 
 {% endblock %}
 

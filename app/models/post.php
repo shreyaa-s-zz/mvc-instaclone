@@ -20,7 +20,7 @@ class Post {
     public static function get_comments()
     {
         $db = \DB::get_instance();
-        $stmt = $db->prepare("SELECT * from comments INNER JOIN posts ON comments.postId = posts.id ORDER BY comments.id");
+        $stmt = $db->query("SELECT * from comments INNER JOIN posts ON comments.postId = posts.id ORDER BY comments.id");
         $rows = $stmt->fetchAll();
         return $rows;
     }
@@ -31,6 +31,13 @@ class Post {
         $stmt = $db->query("SELECT * FROM posts ORDER BY id");
         $rows = $stmt->fetchAll();
         return $rows;
+    }
+
+    public static function like($id)
+    {
+        $db = \DB::get_instance();
+        $sql = "UPDATE posts SET likes = likes+1 WHERE id=$id";
+        $db->query($sql);
     }
 
 
