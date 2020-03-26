@@ -3,18 +3,17 @@
 namespace Model;
 
 class Post {
-    public static function create($path,$caption) {
+    public static function create($userId,$username,$caption,$path) {
         $db = \DB::get_instance();
-        $username = $_SESSION['username'];
-        $userId = $_SESSION['userId'];
         $data = [
-            'userId' => $userId,
-            'username'=> $username,
-            'imagePath' => $path,
-            'caption' => $caption,
+            "userId" => $userId,
+            "username"=> $username,
+            "caption" => $caption,
+            "imagePath" => $path,
+            "likes" => "0",
         ];
-        $stmt = $db->prepare("INSERT INTO posts (userId,username,caption,imagePath) VALUES (:userId,:username,:caption,:imagePath)");
-        $stmt->execute([$data]);
+        $stmt = $db->prepare("INSERT INTO posts (userId,username,caption,imagePath,likes) VALUES (:userId,:username,:caption,:imagePath,:likes)");
+        $stmt->execute($data);
     }
 
     public static function get_comments()
@@ -36,7 +35,7 @@ class Post {
     public static function get_trending()
     {
         $db = \DB::get_instance();
-        $stmt = $db->query("SELECT * FROM posts ORDER BY likes DESC");
+        $stmt = $db->query("SELECT * FROM posts ORDER BY likes,id DESC");
         $rows = $stmt->fetchAll();
         return $rows;
     }

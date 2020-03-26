@@ -3,6 +3,9 @@
 {% block title %}Login{% endblock %}
 
 {% block body %}
+{% if error %}
+{# error msg #}
+{% endif %}
         <main class="login">
             <div class="login-column">
                 <img
@@ -73,7 +76,7 @@
                 <div class="login-section login-sign-up">
                     <span class="login-text">
                         Already have an account?
-                        <a href="/login" class="login-link">
+                        <a href="/" class="login-link">
                             Log In
                         </a>
                     </span>

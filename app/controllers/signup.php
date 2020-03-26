@@ -2,7 +2,7 @@
 
 namespace Controller;
 
-session_start();
+
 class Signup
 {
     public static function get()
@@ -22,10 +22,8 @@ class Signup
       if(\Model\Check::usernameCheck($username)) {
         if(\Model\Check::emailCheck($email)) {
           \Model\User::create_user($name,$username,$email,$passwordHash);
-          echo \View\Loader::make()->render("templates/home.twig", array(
-            "posts" => \Model\Post::get_feed(),
-            "error" => false
-        ));}
+          header("Location: /home");
+        }
         else {
           echo \View\Loader::make()->render("templates/signup.twig", array(
             "error" => "email already exists",

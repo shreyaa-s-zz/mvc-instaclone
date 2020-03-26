@@ -1,6 +1,7 @@
 <?php
 
 namespace Controller;
+session_start();
 
 class Login {
     public function get() {
@@ -12,14 +13,12 @@ class Login {
       $username = $_POST["username"];
       $passwordHash = hash('sha256',$password);
       if (\Model\Check::loginCheck($username, $passwordHash)) {
-        echo \View\Loader::make()->render("templates/home.twig", array(
-            "posts" => \Model\Post::get_feed(),
-            "loggedin" => true
-        ));
+        $_SESSION['username'] = $username;
+        header("Location: /home");
       } else {
         echo \View\Loader::make()->render("templates/login.twig", array(
-            "loggedin" => false
-        ));
+          "error" => true
+      ));
       }
     }
 

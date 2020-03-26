@@ -3,6 +3,9 @@
 {% block title %}Login{% endblock %}
 
 {% block body %}
+{% if error %}
+Hello World!
+{% endif %}
         <main class="login">
             <div class="login-column">
                 <img
@@ -20,7 +23,7 @@
                         title="Logo"
                         class="login-logo"
                     />
-                    <form method="post" action="/login" class="login-form">
+                    <form method="post" action="/" class="login-form">
                         <div class="login-input-container">
                             <input
                                 type="text"

@@ -1,6 +1,7 @@
 <?php
 
 namespace Controller;
+session_start();
 
 class Post {
     public function get() {
@@ -8,30 +9,24 @@ class Post {
     }
 
     public function post() {
+        $username = $_SESSION['username'];
+        $id = $_SESSION['id'];
         $name = $_FILES['file']['name'];
         $caption = $_POST['caption'];
-        $target_dir = "/assets/upload/";
+        $target_dir = "assets/upload/";
+        $path = $target_dir.$name;
         $target_file = $target_dir . basename($_FILES["file"]["name"]);
         // Select file type
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         // Valid file extensions
         $extensions_arr = array("jpg","jpeg","png","gif");
         // Check extension
-        if( in_array($imageFileType,$extensions_arr) ){
             // Upload file
-            move_uploaded_file($_FILES['file']['tmp_name'],$target_dir.$name);
+            move_uploaded_file($_FILES['file']['tmp_name'],$path);
             // Insert record
-            $path = $target_dir.$name;
-            \Model\Post::create($path,$caption);
+            \Model\Post::create($id,$username,$caption,$path);
             $status = true;
-        }
-        else
-          $status = false;
-
-          echo \View\Loader::make()->render("templates/home.twig", array(
-              "posts" => \Model\Post::get_feed(),
-              "posted" => $status,
-          ));
+          header("Location: /home");
     }
 
     public function like($id) {

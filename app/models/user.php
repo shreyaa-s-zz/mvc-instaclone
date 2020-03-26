@@ -1,15 +1,18 @@
 <?php
 
 namespace Model;
+session_start();
+
 
 class User                                               //not user.following based as of yet
 {
-  public static function get_user()
+  public static function get_user($username)
     {
         $db = \DB::get_instance();
-        $username = $_SESSION['username'];
-        $sql = $db->query("SELECT * FROM users WHERE username = $username;");
-        $row = $sql->fetchAll();
+        $stmt = $db->prepare("SELECT * FROM users WHERE username = ?");
+        $stmt->execute([$username]);
+        $row = $stmt->fetch();
+        $_SESSION['id'] = $row['id'];
         return $row;
     }
 
@@ -17,11 +20,12 @@ class User                                               //not user.following ba
     {
         $db = \DB::get_instance();
         $data = [
-            ":name" => $name,
-            ":username" => $username,
-            ":email" => $email,
-            ":password" => $password
+            'name' => $name,
+            'username'=> $username,
+            'email' => $email,
+            'password' => $password,
         ];
+        $_SESSION['username'] = $username;
         $sql = $db->prepare("INSERT INTO users (name,username,email,password) VALUES (:name,:username,:email,:password);");
         $sql->execute($data);
     }

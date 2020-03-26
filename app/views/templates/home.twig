@@ -5,46 +5,51 @@
 {% block body %}
 {% include("templates/navbar.twig") %}
 
+<center>
     {% for post in posts %}
         <section class="photo">
             <header class="photo-header">
                 <div class="photo-header-column">
-                    <span class="photo-username">{{user.username}}</span>
+                    <span class="photo-username">{{post.username}}</span>
                 </div>
             </header>
             <div class="photo-file-container">
-                <img class="photo-file" src="{{post.image}}" />
+                <img class="photo-file" src="{{post.imagePath}}" />
             </div>
-            <div class="photo-info">
+            <div class="photo-info" style="text-align:left;">
                     <div class="photo-icons">
-                        <span class="photo-icon" id="like" data={{post.id}}>
-                        <a href="/post/{{ post.id }}">{{ post.caption }}</a>
-                            <i class="fa fa-heart-o heart fa-lg"></i>
-                        </span>
-                        <span class="photo-icon">
-                            <i class="fa fa-comment-o fa-lg"></i>
-                        </span>
+                    <span class="photo-icon">
+                        <i class="fa fa-heart-o heart fa-lg like_icon" value={{post.id}} id="like"></i>
+                    </span>
+                    <br><br>
+                    {% if caption|length >0 %}
+                        <span class="photo-comment-author">{{post.username}}</span>{{post.caption}}<br><br>
+                    {% endif %}
+                    <span class="photo-likes">{{post.likes}} Likes</span>
                     </div>
-                    <span class="photo-likes">{{post.likes}}</span>
                     <ul class="photo-comments">
                         {% for comment in comments %}
                             <li class="photo-comment">
-                                <span class="photo-comment-author">{{comment.username}}</span>
-                                <span class="photo-comment-note">{{comment.commentNote}}</span>
+                                <span class="photo-comment-author">{{comment.username}}</span>{{comment.commentNote}}
                             </li>
                         {% endfor %}
                     </ul>
                     <form class="photo-add-comment-container" onsubmit="comment()">
                         <textarea placeholder="Add a comment..." class="photo-add-comment"></textarea>
                         {# hidden attribute post id #}
-                        <i class="fa fa-ellipsis-h"></i>
-                        <input type="submit" value="Comment">
+                        <input type="submit" value ="Add Comment" data={{post.id}}>
                     </form>
             </div>
         </section>
     {% endfor %}
 
 <h1> Hello!!!! </h1>
+</center>
+<script>
 {% include("templates/javascript/like.js") %}
+$('#like').click(function() {
+    $(this).removeClass('fa fa-heart-o heart fa-lg like_icon');
+    $(this).addClass('fa heart-red fa-heart heart fa-lg like_icon');
+});
 {% endblock %}
 
