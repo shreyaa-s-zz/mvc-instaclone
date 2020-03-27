@@ -14,8 +14,8 @@ $("#imgInp").change(function(){
   readURL(this);
 });
 
-$(document).ready(function() {
-  $('form').submit(function(event) {
+  $('form .photo-add-comment-container').submit(function(event) {
+    event.preventDefault();
     // get the form data
     var formData = {
         'commentNote': $('input[name=commentNote]').val(),
@@ -29,6 +29,4 @@ $(document).ready(function() {
           document.location.reload(true)
       }
   });
-  event.preventDefault();
-});
 });

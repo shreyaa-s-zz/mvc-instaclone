@@ -36,7 +36,7 @@
                         {% endif %}
                         {% endfor %}
                     </ul>
-                    <form class="photo-add-comment-container" action="/addComment" method="post">
+                    <form class="photo-add-comment-container" method="post">
                         <input id="comment-{{post.id}}" name="commentNote" placeholder="Add a comment..." class="photo-add-comment" type="text" required>
                         <input type="hidden" name="postId" class="photo-add-comment" value="{{post.id}}"><br>
                         <button type="submit" class="btn btn-success"><span class="fa fa-comment-o fa-lg"></span></button>
