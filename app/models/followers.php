@@ -3,7 +3,7 @@
 namespace Model;
 
 class  Followers{
-    public static function get_feed_followers($id) {
+    public static function getFeed_followers($id) {
         $db = \DB::get_instance();
         $stmt = $db->prepare("SELECT * FROM followers");
         $stmt->execute();

@@ -36,5 +36,6 @@ class Post {
         else
         return false;
     }
+
 }
 ?>

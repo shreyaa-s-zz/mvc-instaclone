@@ -16,7 +16,7 @@ class Post {
         $stmt->execute($data);
     }
 
-    public static function get_comments()
+    public static function getComments()
     {
         $db = \DB::get_instance();
         $stmt = $db->query("SELECT * from comments INNER JOIN posts ON comments.postId = posts.id ORDER BY comments.id");
@@ -24,7 +24,7 @@ class Post {
         return $rows;
     }
 
-    public static function get_feed()
+    public static function getFeed()
     {
         $db = \DB::get_instance();
         $stmt = $db->query("SELECT * FROM posts ORDER BY id DESC");
@@ -32,7 +32,7 @@ class Post {
         return $rows;
     }
 
-    public static function get_trending()
+    public static function getTrending()
     {
         $db = \DB::get_instance();
         $stmt = $db->query("SELECT * FROM posts ORDER BY likes,id DESC");
@@ -45,6 +45,21 @@ class Post {
         $db = \DB::get_instance();
         $sql = ("UPDATE posts SET likes = likes+1 WHERE id=$id;");
         $db->query($sql);
+        return true;
+    }
+
+    public static function addComment($postId,$userId,$username,$commentNote)
+    {
+        $db = \DB::get_instance();
+        $data = [
+            "userId" => $userId,
+            "username"=> $username,
+            "postId" => $postId,
+            "commentNote"=> $commentNote
+        ];
+        $stmt = $db->prepare("INSERT INTO comments (postId,userId,username,commentNote) VALUES (:postId,:userId,:username,:commentNote)");
+        var_dump($stmt);
+        $stmt->execute($data);
         return true;
     }
 
