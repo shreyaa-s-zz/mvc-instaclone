@@ -10,9 +10,8 @@ class Post {
             "username"=> $username,
             "caption" => $caption,
             "imagePath" => $path,
-            "likes" => "0",
         ];
-        $stmt = $db->prepare("INSERT INTO posts (userId,username,caption,imagePath,likes) VALUES (:userId,:username,:caption,:imagePath,:likes)");
+        $stmt = $db->prepare("INSERT INTO posts (userId,username,caption,imagePath) VALUES (:userId,:username,:caption,:imagePath)");
         $stmt->execute($data);
     }
 

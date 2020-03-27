@@ -4,7 +4,7 @@ namespace Controller;
 session_start();
 
 class Comment {
-  public function addComment() {
+  public function post() {
     $userId = $_SESSION['id'];
     $username = $_SESSION['username'];
     $commentNote = $_POST['commentNote'];

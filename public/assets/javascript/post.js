@@ -32,3 +32,4 @@ $('form.photo-add-comment-container .btn').click(function (event) {
     }
   });
 });
+
