@@ -14,19 +14,21 @@ $("#imgInp").change(function(){
   readURL(this);
 });
 
-  $('form .photo-add-comment-container').submit(function(event) {
-    event.preventDefault();
-    // get the form data
-    var formData = {
-        'commentNote': $('input[name=commentNote]').val(),
-        'postId': $('input[name=postId]').val(),
-    };
+$('form.photo-add-comment-container .btn').click(function (event) {
+  event.preventDefault();
+  var formNode = $(this).parent();
+  console.log(formNode.serializeArray());
+  // get the form data
+   var formData = {
+     'commentNote': $('input[name=commentNote]').val(),
+     'postId': $('input[name=postId]').val(),
+   };
   $.ajax({
-      type: 'post',
-      url: '/addComment',
-      data: formData ,
-      success: function (response) {
-          document.location.reload(true)
-      }
+    type: 'post',
+    url: '/addComment',
+    data: formData,
+    success: function (response) {
+      document.location.reload(true)
+    }
   });
 });

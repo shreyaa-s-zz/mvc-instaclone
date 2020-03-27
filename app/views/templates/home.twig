@@ -29,23 +29,42 @@
                     </div>
                     <ul class="photo-comments">
                         {% for comment in comments %}
-                        {% if comment.postId == post.id %}
-                            <li class="photo-comment">
-                                <span class="photo-comment-author">{{comment.username}}</span>{{comment.commentNote}}
-                            </li>
-                        {% endif %}
+                            {% if comment.postId == post.id %}
+                                <li class="photo-comment">
+                                    <span class="photo-comment-author">{{comment.username}}</span>{{comment.commentNote}}
+                                </li>
+                            {% endif %}
                         {% endfor %}
                     </ul>
-                    <form class="photo-add-comment-container" method="post">
+                    <span class="photo-add-comment-container" method="post">
                         <input id="comment-{{post.id}}" name="commentNote" placeholder="Add a comment..." class="photo-add-comment" type="text" required>
-                        <input type="hidden" name="postId" class="photo-add-comment" value="{{post.id}}"><br>
-                        <button type="submit" class="btn btn-success"><span class="fa fa-comment-o fa-lg"></span></button>
-                    </form>
+                        <button type="submit" id="{{post.id}}" class="btn btn-success"><span class="fa fa-comment-o fa-lg"></span></button>
+                    </span>
             </div>
         </section>
     {% endfor %}
 
 <h1> Hello!!!! </h1>
 </center>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+$('.photo-add-comment-container .btn').click(function (event) {
+  event.preventDefault();
+  var formNode = $(this).parent();
+  console.log(formNode.serializeArray());
+  // get the form data
+   var formData = {
+     'commentNote': $('input[name=commentNote]').val(),
+     'postId': $('input[name=postId]').val(),
+   };
+  $.ajax({
+    type: 'post',
+    url: '/addComment',
+    data: formData,
+    success: function (response) {
+      document.location.reload(true)
+    }
+  });
+});
+</script>
 {% endblock %}
 
