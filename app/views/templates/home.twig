@@ -18,8 +18,19 @@
             </div>
             <div class="photo-info" style="text-align:left;">
                     <div class="photo-icons">
+                    {% set liked = false %}
                     <span class="photo-icon">
-                        <i class="fa fa-heart-o heart fa-lg like_icon" value={{post.id}} id="like"></i>
+                    {% for like in likes %}
+                        {% if post.id == like.id %}
+                            {% set liked = true %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if liked %}
+                            <span class="fa heart-red fa-heart heart fa-lg like_icon"></span>
+                    {% endif %}
+                    {% if liked == false %}
+                            <button type="submit" id="{{post.id}}" class="btn btn-success"><span class="fa fa-heart-o heart fa-lg like_icon"></span></button>
+                    {% endif %}
                     </span>
                     <br><br>
                     {% if caption|length >0 %}
@@ -43,7 +54,6 @@
             </div>
         </section>
     {% endfor %}
-
 <h1> Hello!!!! </h1>
 </center>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -65,6 +75,23 @@ $('.photo-add-comment-container .btn').click(function (event) {
         document.location.reload(true)
       }
   });
+});
+
+$('.photo-icon .btn').click(function (event) {
+  event.preventDefault();
+  // get the form data
+  var postId = this.id;
+  console.log(postId);
+$.ajax({
+    type: 'post',
+    url: '/like',
+    data: {
+      postId : postId,
+    } ,
+    success: function (response) {
+      document.location.reload(true)
+    }
+});
 });
 </script>
 {% endblock %}

@@ -18,7 +18,7 @@ class Post {
     public static function getComments()
     {
         $db = \DB::get_instance();
-        $stmt = $db->query("SELECT * from comments INNER JOIN posts ON comments.postId = posts.id ORDER BY comments.id");
+        $stmt = $db->query("SELECT * from comments ORDER BY comments.id");
         $rows = $stmt->fetchAll();
         return $rows;
     }
@@ -39,11 +39,22 @@ class Post {
         return $rows;
     }
 
-    public static function like($id)
+    public static function like($id,$userId)
     {
         $db = \DB::get_instance();
-        $sql = ("UPDATE posts SET likes = likes+1 WHERE id=$id;");
-        $db->query($sql);
+        $data1 = [
+            "postId" => $id,
+        ];
+        $sql = $db->prepare("UPDATE posts SET likes = likes+1 WHERE id=:postId;");
+        var_dump($sql);
+        $sql->execute($data1);
+        $data2 = [
+            "userId" => $userId,
+            "postId" => $id,
+        ];
+        $stmt = $db->prepare("INSERT INTO likes (postId,userId) VALUES (:postId,:userId)");
+        var_dump($stmt);
+        $stmt->execute($data2);
         return true;
     }
 
@@ -51,15 +62,27 @@ class Post {
     {
         $db = \DB::get_instance();
         $data = [
+            "postId" => $postId,
             "userId" => $userId,
             "username"=> $username,
-            "postId" => $postId,
             "commentNote"=> $commentNote
         ];
         $stmt = $db->prepare("INSERT INTO comments (postId,userId,username,commentNote) VALUES (:postId,:userId,:username,:commentNote)");
-        var_dump($stmt);
         $stmt->execute($data);
         return true;
+    }
+
+    public static function getLiked()
+    {
+        $userId = $_SESSION['id'];
+        $data = [
+            'userId'=> $userId
+        ];
+        $db = \DB::get_instance();
+        $stmt = $db->prepare("SELECT * FROM likes WHERE userId = :userId");
+        $stmt->execute($data);
+        $rows = $stmt->fetch();
+        return $rows;
     }
 
 }

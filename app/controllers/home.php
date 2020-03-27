@@ -9,7 +9,8 @@ class Home {
         echo \View\Loader::make()->render("templates/home.twig", array(
             "posts" => \Model\Post::getFeed(),
             "user" => \Model\User::get_user($username),
-            "comments" => \Model\Post::getComments()
+            "comments" => \Model\Post::getComments(),
+            "likes" => \Model\Post::getLiked()
         ));
     }
 

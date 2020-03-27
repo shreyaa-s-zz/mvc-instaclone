@@ -14,22 +14,40 @@ $("#imgInp").change(function(){
   readURL(this);
 });
 
-$('form.photo-add-comment-container .btn').click(function (event) {
+$('.photo-add-comment-container .btn').click(function (event) {
   event.preventDefault();
-  var formNode = $(this).parent();
-  console.log(formNode.serializeArray());
   // get the form data
-   var formData = {
-     'commentNote': $('input[name=commentNote]').val(),
-     'postId': $('input[name=postId]').val(),
-   };
-  $.ajax({
+  var postId = this.id;
+  var commentNote = document.getElementById("comment-"+postId).value;
+  console.log(postId,commentNote);
+$.ajax({
     type: 'post',
     url: '/addComment',
-    data: formData,
+    data: {
+      postId : postId,
+      commentNote : commentNote
+    } ,
     success: function (response) {
       document.location.reload(true)
     }
-  });
 });
+});
+
+$('.photo-icon .fa fa-heart-o heart fa-lg like_icon').click(function (event) {
+  event.preventDefault();
+  // get the form data
+  var postId = this.id;
+  console.log(postId);
+$.ajax({
+    type: 'get',
+    url: '/like',
+    data: {
+      postId : postId,
+    } ,
+    success: function (response) {
+      document.location.reload(true)
+    }
+});
+});
+
 

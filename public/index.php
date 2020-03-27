@@ -8,6 +8,7 @@ Toro::serve(array(
     "/post" => "\Controller\Post",
     "/signup" => "\Controller\Signup",
     "/explore" => "\Controller\Explore",
-    "/post/:id" => "\Controller\Post\(:id)",
-    "/addComment" => "\Controller\Comment"
+    // "/post/:id" => "\Controller\Post\(:id)",
+    "/addComment" => "\Controller\Comment",
+    "/like" => "\Controller\Like"
 ));

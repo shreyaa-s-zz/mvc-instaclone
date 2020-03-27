@@ -29,13 +29,14 @@ class Post {
           header("Location: /home");
     }
 
-    public function like($id) {
-        if(\Model\Post::like($id)) {
-            return true;
-        }
-        else
-        return false;
-    }
+    // public function like($id) {
+    //     $userId = $_SESSION['id'];
+    //     if(\Model\Post::like($id,$userId)) {
+    //         return true;
+    //     }
+    //     else
+    //     return false;
+    // }
 
 }
 ?>
