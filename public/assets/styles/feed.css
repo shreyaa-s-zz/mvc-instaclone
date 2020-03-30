@@ -1,0 +1,101 @@
+.feed{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.photo{
+    width:60%;
+    background-color: white;
+    border-radius: 5px;
+    border:1px solid rgba(0,0,0,.0975);
+    max-width: 800px;
+    margin-bottom: 40px;
+}
+
+.photo-header{
+    padding:15px 20px;
+    display: flex;
+    align-items: center;
+    border-bottom:1px solid rgba(0,0,0,.0975);
+}
+
+.photo-avatar{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    margin-right:15px;
+}
+
+.photo-username{
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.photo-file{
+    max-width: 100%;
+}
+
+.photo-info{
+    padding:20px 20px 0 20px;
+}
+
+.photo-icons{
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.photo-icon:first-child{
+    margin-right:10px;
+}
+
+.photo-likes{
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.photo-comment{
+    margin-bottom: 10px;
+}
+
+.photo-comment-author{
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+.photo-time-ago{
+    color:#999;
+    text-transform: uppercase;
+    font-size: 10px;
+    padding-bottom: 10px;
+    display: block;
+    border-bottom:1px solid rgba(0,0,0,.0975);
+}
+
+.photo-add-comment-container{
+    position: relative;
+}
+
+.photo-add-comment-container i{
+    position: absolute;
+    top:17px;
+    right:0;
+}
+
+.photo-add-comment{
+    width: 97%;
+    border:0;
+    resize: none;
+    font-size: 14px;
+    padding-top:15px;
+}
+
+.photo-add-comment:focus{
+    outline: none;
+}
+
+.heart-red{
+    color:red;
+}

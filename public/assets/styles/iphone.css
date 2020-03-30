@@ -1,0 +1,129 @@
+@media only screen
+    and (min-width: 320px)
+    and (max-width: 650px){
+        /* Globals */
+        body{
+            padding-top: calc(80px);
+            font-size: 14px;
+        }
+        /* Navigation */
+        .navigation{
+            padding:0 10px;
+        }
+        .navigation-search-container{
+            display: none;
+        }
+        .navigation-icons{
+            display: flex;
+        }
+        /* Photo */
+        .photo{
+            width:100%;
+            border:none;
+            margin-bottom: 20px;
+        }
+        .photo,
+        .photo *{
+            background-color: transparent;
+        }
+        .photo-time-ago{
+            border:none;
+        }
+        .photo-add-comment-container{
+            display: none;
+        }
+        /* Footer */
+        .footer{
+            justify-content: center;
+        }
+        .footer-list{
+            justify-content: center;
+        }
+        .footer-list-item{
+            margin-bottom: 15px;
+        }
+        /* Explore */ 
+        .people{
+            width: 100%;
+            border:none;
+        }
+        .people-person{
+            border-bottom:0;
+        }
+        /* Login */
+        .login{
+            width: 100%;
+            margin-top: 0;
+        }
+        .login-column{
+            width: 100%;
+        }
+        .login-column:first-child{
+            display: none;
+        }
+        .login-column:last-child{
+            margin-left:0
+        }
+        .login-section{
+            background-color: transparent;
+            border:none;
+        }
+        .login-appstores{
+            justify-content: center;
+        }
+        .login-appstore:first-child{
+            margin-right: 20px;
+        }
+        /* Profile */
+        .profile{
+            margin-top: 20px;
+            width: 100%;
+        }
+        .profile-header{
+            margin-bottom: 0;
+        }
+        .profile-name{
+            flex-wrap: wrap;
+            order:1;
+        }
+        .profile-avatar{
+            width:77px;
+            height: 77px;
+        }
+        .profile-title{
+            font-size: 22px;
+        }
+        .profile-button{
+            order:3;
+            margin-top: 10px;
+            width: 100%;
+            text-align: center;
+        }
+        .profile-info{
+            display: flex;
+            flex-direction: column;
+        }
+        .profile-bio{
+            order:2;
+        }
+        .profile-numbers{
+            order:3;
+            margin-top: 30px;
+        }
+        .profile-numbers li{
+            font-size: 14px;
+            text-align: center;
+            color:#999;
+        }
+        .profile-number{
+            color:black;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+        .profile-picture{
+            width: 33%;
+        }
+        .profile-picture-overlay{
+            display: none;
+        }
+    }
