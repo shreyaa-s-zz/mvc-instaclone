@@ -3,14 +3,14 @@
 namespace Controller;
 session_start();
 
-class Home {
-    public function get() {
+class Explore {
+
+  public function get() {
         $username = $_SESSION['username'];
         echo \View\Loader::make()->render("templates/home.twig", array(
-            "posts" => \Model\Post::getFeed(),
+            "posts" => \Model\Post::getTrending(),
             "user" => \Model\User::get_user($username),
-            "comments" => \Model\Post::getComments(),
-            "likes" => \Model\Post::getLiked()
+            "comments" => \Model\Post::getComments()
         ));
     }
 

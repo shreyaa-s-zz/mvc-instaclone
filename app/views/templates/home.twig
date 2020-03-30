@@ -1,103 +1,98 @@
 {% extends "templates/base.twig" %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Feed{% endblock %}
 
 {% block body %}
-        <main class="login">
-            <div class="login-column">
-                <img 
-                    src="/assets/images/phone.png"
-                    alt="Phone Image"
-                    title="Phone Image"
-                    class="login-phone-image"
-                />
+{% include("templates/navbar.twig") %}
+
+<center>
+    {% for post in posts %}
+        <section class="photo">
+            <header class="photo-header">
+                <div class="photo-header-column">
+                    <span class="photo-username">{{post.username}}</span>
+                </div>
+            </header>
+            <div class="photo-file-container">
+                <img class="photo-file" src="{{post.imagePath}}" />
             </div>
-            <section class="login-column">
-                <div class="login-section login-sign-in">
-                    <img 
-                        src="/assets/images/logo.png"
-                        alt="Logo"
-                        title="Logo"
-                        class="login-logo"
-                    />
-                    <form method="GET" action="feed.html" class="login-form">
-                        <div class="login-input-container">
-                            <input 
-                                type="text"
-                                name="username"
-                                placeholder="Username"
-                                required
-                                class="login-input"
-                            />
-                        </div>
-                        <div class="login-input-container">
-                            <input 
-                                type="password"
-                                name="password"
-                                placeholder="Password"
-                                required
-                                class="login-input" 
-                            />
-                            <a href="#" class="login-form-link">Forgot?</a>
-                        </div>
-                        <div class="login-input-container">
-                            <input
-                                type="submit"
-                                value="Log in"
-                                class="login-input login-input--btn"
-                            />
-                        </div>
-                    </form>
-                    <span class="login-divider">or</span>
-                    <a class="login-fb-link" href="#">
-                        <i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i> Log in with Facebook
-                    </a>
-                </div>
-                <div class="login-section login-sign-up">
-                    <span class="login-text">
-                        Don't have an account? 
-                        <a href="#" class="login-link">
-                            Sign up
-                        </a>
+            <div class="photo-info" style="text-align:left;">
+                    <div class="photo-icons">
+                    {% set liked = false %}
+                    <span class="photo-icon">
+                    {% for like in likes %}
+                        {% if post.id == like.id %}
+                            {% set liked = true %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if liked %}
+                            <span class="fa heart-red fa-heart heart fa-lg like_icon"></span>
+                    {% endif %}
+                    {% if liked == false %}
+                            <button type="submit" id="{{post.id}}" class="btn btn-success"><span class="fa fa-heart-o heart fa-lg like_icon"></span></button>
+                    {% endif %}
                     </span>
-                </div>
-                <div class="login-section login-section--transparent login-app">
-                    <span class="login-text">
-                        Get the app.
-                    </span>
-                    <div class="login-appstores">
-                        <img 
-                            src="/assets/images/ios.png"
-                            alt="iOS"
-                            title="Get the app!"
-                            class="login-appstore" 
-                        />
-                        <img 
-                            src="/assets/images/android.png"
-                            alt="Android"
-                            title="Get the app!"
-                            class="login-appstore" 
-                        />
+                    <br><br>
+                    {% if caption|length >0 %}
+                        <span class="photo-comment-author">{{post.username}}</span>{{post.caption}}<br><br>
+                    {% endif %}
+                    <span class="photo-likes">{{post.likes}} Likes</span>
                     </div>
-                </div>
-            </section>
-        </main>
-{# <form action="/" method="POST">
-  <p><textarea name="caption" placeholder="Caption"></textarea></p>
-  <p><input type="submit" /></p>
-  {% if posted %}
-  <p>
-    <em><strong>Successfully</strong> posted!</em>
-  </p>
-  {% endif %}
-</form> #}
-{% if posts|length > 0 %}
-<ol>
-  {% for post in posts %}
-  <li>
-    <a href="/post/{{ post.id }}">{{ post.caption }}</a>
-  </li>
-  {% endfor %}
-</ol>
-{% endif %}
+                    <ul class="photo-comments">
+                        {% for comment in comments %}
+                            {% if comment.postId == post.id %}
+                                <li class="photo-comment">
+                                    <span class="photo-comment-author">{{comment.username}}</span>{{comment.commentNote}}
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                    <span class="photo-add-comment-container" method="post">
+                        <input id="comment-{{post.id}}" name="commentNote" placeholder="Add a comment..." class="photo-add-comment" type="text" required>
+                        <button type="submit" id="{{post.id}}" class="btn btn-success"><span class="fa fa-comment-o fa-lg"></span></button>
+                    </span>
+            </div>
+        </section>
+    {% endfor %}
+<h1> Hello!!!! </h1>
+</center>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$('.photo-add-comment-container .btn').click(function (event) {
+    event.preventDefault();
+    // get the form data
+    var postId = this.id;
+    var commentNote = document.getElementById("comment-"+postId).value;
+    console.log(postId,commentNote);
+  $.ajax({
+      type: 'post',
+      url: '/addComment',
+      data: {
+        postId : postId,
+        commentNote : commentNote
+      } ,
+      success: function (response) {
+        document.location.reload(true)
+      }
+  });
+});
+
+$('.photo-icon .btn').click(function (event) {
+  event.preventDefault();
+  // get the form data
+  var postId = this.id;
+  console.log(postId);
+$.ajax({
+    type: 'post',
+    url: '/like',
+    data: {
+      postId : postId,
+    } ,
+    success: function (response) {
+      document.location.reload(true)
+    }
+});
+});
+</script>
 {% endblock %}
+
